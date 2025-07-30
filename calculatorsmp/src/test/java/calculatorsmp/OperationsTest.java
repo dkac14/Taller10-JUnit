@@ -148,6 +148,37 @@ class OperationsTest {
     }
 
     @Test
+    @DisplayName("La fórmula no debe ser nula")
+    public void testFormulaNoEsNula() {
+        String resultado = Operations.MakeFormula();
+        assertNotNull(resultado, "La fórmula no debe ser nula");
+    }
+
+    @Test
+    @DisplayName("La fórmula no debe estar vacía")
+    public void testFormulaNoEsVacia() {
+        String resultado = Operations.MakeFormula();
+        assertFalse(resultado.trim().isEmpty(), "La fórmula no debe estar vacía");
+    }
+
+    @Test
+    @DisplayName("La fórmula solo contiene dígitos y operadores válidos")
+    public void testFormulaCaracteresValidos() {
+        String resultado = Operations.MakeFormula();
+        assertTrue(resultado.matches("[0-9+\\-*]+"),
+                "La fórmula solo debe contener dígitos y operadores válidos");
+    }
+
+    @Test
+    @DisplayName("La fórmula contiene al menos un operador")
+    public void testFormulaContieneOperador() {
+        String resultado = Operations.MakeFormula();
+        boolean contiene = resultado.contains("+") || resultado.contains("-") || resultado.contains("*")
+                || resultado.contains("/");
+        assertTrue(contiene, "La fórmula debe contener al menos un operador");
+    }
+
+    @Test
     @DisplayName("La fórmula empieza y termina con un número")
     public void testFormulaEmpiezaYTerminaConNumero() {
         String resultado = Operations.MakeFormula();
@@ -172,27 +203,4 @@ class OperationsTest {
         assertFalse(primerChar == '+' || primerChar == '-' || primerChar == '*' || primerChar == '/',
                 "La fórmula no debe comenzar con un operador");
     }
-
-    @Test
-    @DisplayName("La fórmula no debe ser nula")
-    public void testFormulaNoEsNula() {
-        String resultado = Operations.MakeFormula();
-        assertNotNull(resultado, "La fórmula no debe ser nula");
-    }
-
-    @Test
-    @DisplayName("La fórmula no debe estar vacía")
-    public void testFormulaNoEsVacia() {
-        String resultado = Operations.MakeFormula();
-        assertFalse(resultado.trim().isEmpty(), "La fórmula no debe estar vacía");
-    }
-
-    @Test
-    @DisplayName("La fórmula solo contiene dígitos y operadores válidos")
-    public void testFormulaCaracteresValidos() {
-        String resultado = Operations.MakeFormula();
-        assertTrue(resultado.matches("[0-9+\\-*]+"),
-                "La fórmula solo debe contener dígitos y operadores válidos");
-    }
-
 }
